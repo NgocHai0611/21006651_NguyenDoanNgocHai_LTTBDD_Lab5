@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   Pressable,
+  Alert,
 } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
@@ -16,8 +17,39 @@ import CheckBox from "react-native-check-box";
 import { useState } from "react";
 import { Link } from "expo-router";
 
-export default function Screen2() {
+export default function Screen2({ navigation }) {
   const [stateCheckBox, setStateCheckBox] = useState(false);
+  const dataToPass = "Hello from Screen2";
+  const [user, setUser] = useState({
+    username: "hai",
+    pass: "123",
+    email: "hai0661@gmail.com",
+  });
+  const [userName, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    console.log("Process");
+
+    if (userName == "" || password == "" || email == "") {
+      alert("Vui Lòng Nhập Thông Tin");
+    } else if (stateCheckBox == false) {
+      alert("Vui Lòng Tick Vào Ô");
+    } else {
+      const newUser = {
+        username: userName,
+        pass: password,
+        email: email,
+      };
+
+      setUser(newUser); // Cập nhật user mới
+      alert("Đăng ký thành công!");
+
+      // Điều hướng sang screen3 và truyền user mới
+      navigation.navigate("login", { datauser: newUser });
+    }
+  };
 
   return (
     <View style={styles.containerScreen2}>
@@ -41,6 +73,7 @@ export default function Screen2() {
             <TextInput
               style={[styles.sizeInputSubmit, styles.paddingInput]}
               placeholder="Enter your user name"
+              onChangeText={setUsername}
             ></TextInput>
           </View>
 
@@ -55,6 +88,7 @@ export default function Screen2() {
             <TextInput
               style={[styles.sizeInputSubmit, styles.paddingInput]}
               placeholder="Enter your email address"
+              onChangeText={setEmail}
             ></TextInput>
           </View>
 
@@ -83,6 +117,7 @@ export default function Screen2() {
               style={[styles.sizeInputSubmit, styles.paddingInput]}
               secureTextEntry={true}
               placeholder="Enter your password"
+              onChangeText={setPassword}
             ></TextInput>
           </View>
         </View>
@@ -102,7 +137,7 @@ export default function Screen2() {
           </Link>
         </View>
 
-        <Pressable style={styles.btnContinue}>
+        <Pressable style={styles.btnContinue} onPress={handleLogin}>
           <Text>Countinue</Text>
         </Pressable>
       </View>

@@ -12,8 +12,26 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { useState } from "react";
 
-export default function Screen3({ navigation }) {
+export default function Screen3({ navigation, route }) {
+  const { datauser } = route.params;
+  console.log(datauser);
+
+  const [email, setEmail] = useState("");
+  const [passs, setPass] = useState("");
+
+  const handleLogin = () => {
+    if (email == "" && passs == "") {
+      alert("Nhập thông tin tài khoản");
+    } else if (email != datauser.email || passs != datauser.pass) {
+      alert("Login Fail");
+    } else {
+      alert("Login Success");
+      navigation.navigate("dashboard");
+    }
+  };
+
   return (
     <View style={styles.containerLogin}>
       <View>
@@ -35,6 +53,7 @@ export default function Screen3({ navigation }) {
               { borderWidth: 1, borderColor: "black" },
             ]}
             placeholder="Enter email"
+            onChangeText={setEmail}
           ></TextInput>
         </View>
         <View style={{ marginTop: 10 }}>
@@ -60,16 +79,13 @@ export default function Screen3({ navigation }) {
               { borderWidth: 1, borderColor: "black" },
             ]}
             placeholder="Enter password"
+            secureTextEntry={true}
+            onChangeText={setPass}
           ></TextInput>
         </View>
       </View>
 
-      <Pressable
-        style={styles.btnLogin}
-        onPress={() => {
-          navigation.navigate("dashboard");
-        }}
-      >
+      <Pressable style={styles.btnLogin} onPress={handleLogin}>
         <Text style={{ fontWeight: "bold", fontSize: 20, color: "white" }}>
           Login
         </Text>
