@@ -13,6 +13,6 @@ npx expo install react-dom react-native-web @expo/metro-runtime
 
 cd YOUR_PROJECT
 
-
-NavigationContainer>
-      <Stack.Navigator initialRouteName
+const Stack = createStackNavigator();
+NavigationContainer
+Stack.Navigator initialRouteName
