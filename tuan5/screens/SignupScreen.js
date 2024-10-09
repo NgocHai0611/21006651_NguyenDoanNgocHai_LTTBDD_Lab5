@@ -10,6 +10,8 @@ import {
   ScrollView,
 } from "react-native";
 
+import { CheckBox } from "react-native-elements";
+
 const SignupScreen = ({ navigation }) => {
   // State quản lý các trường dữ liệu người dùng nhập
   const [userName, setUserName] = useState(""); // Quản lý tên người dùng
@@ -26,6 +28,15 @@ const SignupScreen = ({ navigation }) => {
 
   // Mảng chứa danh sách người dùng (được cập nhật khi đăng ký thành công)
   const [users, setUsers] = useState([]);
+
+  const toggleCheckbox = () => {
+    setAgreeTerms((prev) => {
+      const newValue = !prev; // Đảo ngược giá trị hiện tại
+
+      return newValue; // Trả về giá trị mới
+    });
+  };
+  const [isChecked, setIsChecked] = useState(false);
 
   // Hàm xử lý khi nhấn nút Đăng ký
   const handleSignup = () => {
@@ -121,7 +132,12 @@ const SignupScreen = ({ navigation }) => {
 
         {/* Checkbox điều khoản */}
         <View style={styles.checkboxContainer}>
-          <Switch value={agreeTerms} onValueChange={setAgreeTerms} />
+          <CheckBox
+            value={agreeTerms}
+            checked={agreeTerms} // Trạng thái checkbox
+            onPress={toggleCheckbox}
+            style={styles.checkbox}
+          />
           <Text style={styles.checkboxLabel}>
             I agree with Terms & Conditions
           </Text>
