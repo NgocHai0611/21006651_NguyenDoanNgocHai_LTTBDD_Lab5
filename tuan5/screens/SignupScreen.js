@@ -5,8 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  CheckBox,
   Image,
+  Switch,
   ScrollView,
 } from "react-native";
 
@@ -121,28 +121,14 @@ const SignupScreen = ({ navigation }) => {
 
         {/* Checkbox điều khoản */}
         <View style={styles.checkboxContainer}>
-          <CheckBox
-            value={agreeTerms} // Giá trị checkbox (đã tích hay chưa)
-            onValueChange={setAgreeTerms} // Thay đổi giá trị checkbox
-          />
+          <Switch value={agreeTerms} onValueChange={setAgreeTerms} />
           <Text style={styles.checkboxLabel}>
-            I agree with
-            {/* Điều khoản */}
+            I agree with Terms & Conditions
           </Text>
-          <Text style={styles.link}>Terms & Conditions</Text>
         </View>
 
-        {/* Nút Đăng ký */}
         <TouchableOpacity style={styles.button} onPress={handleSignup}>
           <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
-
-        {/* Nút quay lại trang chủ */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("HomeScreen")}
-        >
-          <Text style={styles.buttonText}>Back to home</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
