@@ -1,8 +1,8 @@
-npm i @react-navigation/stack
+npm install @react-navigation/native
 
-npm i @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context
 
-`npm install react-native-screens react-native-safe-area-context`
+npm install @react-navigation/native-stack
 
 Expo CLI: Cài đặt Expo CLI toàn cục bằng cách chạy lệnh sau:
 npm install -g expo-cli   
